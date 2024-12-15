@@ -32,33 +32,13 @@ public class PalindromeNumber {
         if (x < 0 || (x % 10 == 0 && x != 0)) {
             return false;
         }
-        String numStr = Integer.toString(x);
-        char numArr[] = numStr.toCharArray();
-        char[] numArrCopy = numArr.clone();
 
-        for (int i = 0; i < numArrCopy.length; i++) {
-            for (int j = 0; j < numArrCopy.length - i - 1; j++) {
-                if (numArrCopy[j] < numArrCopy[j + 1]) {
-                    char temp = numArrCopy[j];
-                    numArrCopy[j] = numArrCopy[j + 1];
-                    numArrCopy[j + 1] = temp;
-                }
-            }
-        }
-        int cont = 0;
-        for (int i = 0; i < numArr.length; i++) {
-            for (int j = 0; j < numArrCopy.length; j++) {
-                if(numArr[i] == numArrCopy[j]){
-                    cont++;
-                    break;
-                }
-            }
+        int revertedNumber = 0;
+        while (x > revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            x /= 10;
         }
 
-        if(cont == numArr.length){
-            return true;
-        }else{
-            return false;
-        }
+        return x == revertedNumber || x == revertedNumber / 10;
     }
 }
